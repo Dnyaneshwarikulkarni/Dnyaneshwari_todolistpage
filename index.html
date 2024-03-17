@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Todo List</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: cursive;
+    }
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://img.freepik.com/free-photo/old-camera-notebook-laptop-with-blue-pencil-cup-cappuccino-white-background_23-2147979092.jpg') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(5px); /* Adjust the blur amount as desired */
+    }
+    .content-container {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin: 5% 0;
+      font-size: 3rem;
+      text-decoration: underline;
+    }
+    .form-inline {
+      display: flex;
+      justify-content: center;
+    }
+    .input-group {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-control {
+      width: 45%;
+    }
+    ul {
+      text-align: left;
+      padding-left: 10%;
+      padding: 7%;
+      font-size: 2rem;
+      list-style: circle;
+    }
+    li {
+      cursor: pointer;
+    }
+    .completed {
+      text-decoration: line-through;
+    }
+    .task-date {
+      width: 45%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="background-container"></div>
+<div class="content-container container">
+  <h1 class="row">TODO APP</h1>
+  <br><br>
+  <div class="row">
+    <form class="form-inline">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-pencil"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="todo-item" id="box">
+        <input type="date" class="form-control task-date">
+        <div class="form-group">
+          <input type="button" class="btn btn-primary" value="Add" onclick="add_item()">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <ul id="list_item"></ul>
+  </div>
+</div>
+<script>
+  function add_item() {
+    let item = document.getElementById("box");
+    let date = document.querySelector(".task-date").value;
+    let list_item = document.getElementById("list_item");
+    if(item.value != ""){
+      let make_li = document.createElement("LI");
+      make_li.appendChild(document.createTextNode(item.value + " - " + date));
+      list_item.appendChild(make_li);
+      item.value="";
+      make_li.onclick = function(){
+        this.classList.toggle("completed");
+      }
+    }
+    else{
+      alert("Please add a value to the item");
+    }
+  }
+</script>
+</body>
+</html>
